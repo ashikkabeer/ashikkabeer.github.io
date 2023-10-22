@@ -1,0 +1,177 @@
+* {
+    margin: 0%;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* @keyframes bg {
+    from {
+        background-color: #5DADE2;
+    }
+
+    to {
+        background-color: #76D7C4;
+    }
+}
+body {
+    animation-name: bg;
+    animation-duration: 5s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+} */
+@keyframes startup {
+    0% {
+        color: #14213d;
+        left: 0px;
+        top: 0px;
+    }
+
+    25% {
+        color: #fca311;
+        left: 200px;
+        top: 0px;
+    }
+
+    50% {
+        color: #14213d;
+        left: 200px;
+        top: 200px;
+    }
+
+    75% {
+        color: #0000FF;
+        left: 0px;
+        top: 200px;
+    }
+
+    100% {
+        color: black;
+        left: 0px;
+        top: 0px;
+    }
+}
+
+html,
+body,
+.grid {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+}
+
+.grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    /* z-index: -1; */
+    background-image:
+        repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+        repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+    background-size: 40vh 40vh;
+}
+
+.content-container {
+    position: relative;
+    z-index: 0;
+    overflow: auto;
+    height: 100%;
+    overflow-y: auto;
+    /* Set the height of the container to match the viewport height */
+    padding: 20px;
+    /* Add some padding to prevent content from being hidden under the grid */
+}
+
+.intro {
+    padding-left: 10vh;
+    padding-top: 10em;
+
+}
+
+.hello {
+    font-size: 5rem;
+}
+
+.name {
+    font-size: 8em;
+    font-weight: 800;
+    animation-name: startup;
+    animation-duration: 5s;
+    animation-delay: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+}
+
+span {
+    color: blue;
+}
+
+.dis {
+    width: 48%;
+    margin-right: auto;
+    margin-left: 10vh;
+    animation: slide-in 2s ease forwards;
+    overflow: hidden;
+}
+
+.center {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 80%;
+}
+
+.line {
+    border-bottom: 1px solid #888;
+    width: 100%;
+}
+
+.exp-heading {
+    margin-left: 10vh;
+    margin-top: 10vh;
+    font-size: 2rem;
+}
+
+.margin {
+    margin-left: 10vh;
+    width: 55%
+}
+
+.dist {
+    margin-top: 2vh;
+}
+
+.exp-heads {
+    font-weight: 500;
+    font-size: 1.1em;
+}
+
+.all-skills>ul {
+    margin-left: 8vh;
+    margin-top: 2vh;
+    display: flex;
+    justify-content: space-between;
+}
+
+.skiller {
+    flex: 1;
+    justify-content: space-around
+}
+.lists {
+    font-size: 1em;
+    transition: font-size 0.5s;
+}
+.lists:hover {
+    font-size: 1.2rem;
+}
+.exp {
+    color: black;
+    transition: font-style 0s;
+    transition-timing-function: ease-in-out
+}
+.exp:hover {
+    font-style: italic;
+
+}
