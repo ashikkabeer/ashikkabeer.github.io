@@ -1,0 +1,73 @@
+@media screen and (max-width: 768px) {
+
+    /* Your mobile-specific styles go here */
+    .grid {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        /* z-index: -1; */
+        background-image:
+            repeating-linear-gradient(#ccc 0 1px, transparent 1px 100%),
+            repeating-linear-gradient(90deg, #ccc 0 1px, transparent 1px 100%);
+        background-size: 20vh 20vh;
+    }
+    body {
+        margin: 0px;
+    }
+
+    .hello {
+        font-size: 2rem;
+    }
+
+    .name {
+        font-size: 3em;
+        font-weight: 800;
+
+    }
+    .dis {
+        width: 100%;
+        margin-right: auto;
+        margin-left: 1vh;
+    }
+
+    .intro {
+        padding-left: 1vh;
+        padding-top: 5em;
+    }
+
+    .exp-heading {
+        margin-left: 1vh;
+        margin-top: 10vh;
+        font-size: 2rem;
+    }
+
+    .dist {
+        margin-top: 2vh;
+    }
+
+    .margin {
+        margin-left: 1vh;
+        width: 70%
+    }
+
+    .all-skills>ul {
+        margin-left: 0vh;
+        margin-top: 2vh;
+        display: flex;
+        width: 90%;
+        justify-content: space-between;
+    }
+
+    .skiller {
+        flex: 1;
+        justify-content: space-around
+    }
+
+    .lists {
+        margin-right: 4vh;
+    }
+
+}
