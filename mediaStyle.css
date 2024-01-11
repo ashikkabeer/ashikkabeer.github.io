@@ -1,0 +1,48 @@
+@media only screen and (max-width: 768px) {
+
+    /* Add your responsive styles here */
+    body {
+        background-color: #020202;
+    }
+
+    .nav {
+        display: none;
+    }
+    .grid-container {
+        margin: 2.5em;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid-item {
+        text-align: left;
+        display: flex;
+        align-items: start;
+        justify-content: flex-start;
+    }
+    .content-body {
+        margin-left: 2em;
+        margin-right: 2em;
+    
+    }
+    .project-item {
+
+    }
+    .project-title {
+        font-weight: 800;
+        font-size: x-large;
+        margin-bottom: 0px;
+    }
+    
+    .project-stack {
+        margin-top: 5px;
+        font-size: 0.9rem;
+        font-style: italic;
+    }
+    .project-explain {
+    margin-right: 0;
+    }
+    .project-details {
+    
+    }
+}
