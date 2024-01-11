@@ -27,7 +27,11 @@ body {
     margin: 1.5em;
 
 }
+.quote {
+    font-family: 'Cedarville Cursive', cursive;
+    font-size: 1.5em;
 
+}
 .m-0 {
     margin: 0px;
 }
@@ -43,9 +47,13 @@ body {
 .bold-font {
     font-weight: bolder;
 }
-
 .name {
-    font-size: xx-large;
+    font-weight: 200;
+    font-size: 2em;
+
+}
+.last-name {
+    font-weight: 800;    
 }
 
 
@@ -68,19 +76,23 @@ body {
 
 .grid-container {
     border: 2px #33b15d;
-    /* margin: 4em; */
-    margin-left: 4em;
-    margin-right: 4em;
+    margin: 0em;
+    margin-left: 0px;
+    margin-right: 0px;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     /* gap: 8px;    */
 }
+.content-body-grid {
+    margin-left: 0;
+    margin-right: 0;
 
+}
 .grid-item {
     text-align: left;
     display: flex;
     align-items: start;
-    justify-content: center;
+    justify-content: space-between;
 }
 .line {
     width: 100%;

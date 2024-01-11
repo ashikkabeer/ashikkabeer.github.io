@@ -12,6 +12,7 @@
         margin: 2.5em;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
+
     }
     
     .grid-item {
@@ -19,10 +20,11 @@
         display: flex;
         align-items: start;
         justify-content: flex-start;
+
     }
     .content-body {
-        margin-left: 2em;
-        margin-right: 2em;
+        margin-left: 1.5em;
+        margin-right: 1em;
     
     }
     .project-item {
