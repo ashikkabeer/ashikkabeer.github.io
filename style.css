@@ -8,7 +8,6 @@ body {
     background-color: #0d0d0d;
 
 }
-
 .text-white {
     color: white;
 }
@@ -53,7 +52,8 @@ body {
 
 }
 .last-name {
-    font-weight: 800;    
+    font-weight: 900;    
+    font-style: italic;
 }
 
 
@@ -83,11 +83,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     /* gap: 8px;    */
 }
-.content-body-grid {
-    margin-left: 0;
-    margin-right: 0;
 
-}
 .grid-item {
     text-align: left;
     display: flex;
