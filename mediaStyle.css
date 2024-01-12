@@ -22,15 +22,15 @@
 
     .changeColor {
         border-radius: 5px;
-        opacity: 50%;
+        opacity: 20%;
         border: 2px white;
         margin-top: 8em;
-        background-color: var(--text-color);
+        /* background-color: var(--hero-text); */
     }
-
+    
     .change-clr-btn {
         font-style: italic;
-        color: var(--text-color);
+        color: var(--hero-text);
         align-items: flex-end;
     }
 
@@ -107,4 +107,23 @@
     }
 
     .project-details {}
+    .connect-btn {
+        display: inline-block;
+        margin-top: 10px;
+        padding-top: 1em;
+        padding-bottom: 1em;
+        padding-left: 2rem;
+        padding-right: 2rem;
+        margin: 1em;
+    }
+    .socials {
+        display: flex;
+        flex-wrap: wrap; /* Add this line */
+        justify-content: center;
+    }
+    .connect-btn-txt {
+        display: flex;
+        align-items: center;
+    }
+    
 }

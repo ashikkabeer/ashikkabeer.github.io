@@ -3,13 +3,11 @@
     --secondary-color: #33b15d;
     --text-color: white;
     --hero-text: white;
-    --transition-duration: 0.5s;
+
 }
 
 html {
     scroll-behavior: smooth;
-    /* transition: all 1s ease; */
-    transition: background-color var(--transition-duration) ease, color var(--transition-duration) ease;
 }
 
 .changeColor {
@@ -65,8 +63,10 @@ body {
     font-family: 'Cedarville Cursive', cursive;
     font-size: 1.5em;
     user-select: none;
+    animation: textAnimation 1s ease-in-out;
 
 }
+
 
 .m-0 {
     margin: 0px;
@@ -84,18 +84,30 @@ body {
     font-weight: bolder;
 }
 
+@keyframes textAnimation {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .name {
     user-select: none;
     font-weight: 200;
     font-size: 4em;
     margin-bottom: 0px;
+    animation: textAnimation 1s ease-in-out;
 }
 
 .last-name {
     font-weight: 900;
     font-style: italic;
 }
-
 
 .middle {
     width: 100%;
@@ -181,5 +193,62 @@ button {
     padding-right: 0.9em;
     padding: 5px 5px;
     border: 0px;
-    border-radius: 2px;
+    border-radius: 5px;
+}
+
+.connect-btn {
+    display: inline-block;
+    margin-top: 10px;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    margin: 1em;
+}
+
+.socials {
+    display: flex;
+    flex-wrap: wrap;
+    /* Add this line */
+    justify-content: center;
+}
+
+.white-space {
+    padding: 2rem;
+}
+
+.twitter {
+    background-color: #14171A;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.twitter:hover {
+    background-color: #0D1013;
+}
+
+.linkedin {
+    background-color: #0077b5;
+    transition: background-color 0.3s ease;
+}
+
+.linkedin:hover {
+    background-color: #005e8c;
+}
+
+.github {
+    background-color: #24292E;
+    color: white;
+    transition: background-color 0.3s ease;
+}
+
+.github:hover {
+    background-color: #1c2125;
+}
+
+.showwcase {
+    background-color: #dcdfed;
+    transition: background-color 0.3s ease;
+}
+
+.showwcase:hover {
+    background-color: #c8cce3;
 }
