@@ -26,19 +26,27 @@
 <body>
     <div class="container">
         <!-- <button class="burger">Burger</button> -->
-        <div class="nav text-white">
-            <a href="#">Ashik Kabeer</a>
+        <div class="nav hero-text">
+            <a class="name-logo" href="#">Ashik Kabeer</a>
             <a href="#projects">Projects</a>
             <!-- <a href="#about">About</a> -->
             <a href="#blog">Blog</a>
             <a href="#connect">connect</a>
         </div>
-        <div class="middle text-white">
-
-            <h1 class="name">Ashik <span class="last-name">Kabeer</span></h1>
-            <p class="quote m-0">Yeah! I Write Backend Code</p>
+        
+        <div class="middle hero-text">
+            
+            <div class="">
+                <h1 class="name">Ashik <span class="hero-text last-name">Kabeer</span></h1>
+                <p class="quote m-0">Yeah! I Write Backend Code</p>
+            </div>
+            <div class="changeColor">
+                <button class="change-clr-btn" onclick="changeColors()">Change Theme</button>
+            </div>
 
         </div>
+
+
         <div class="m-0 details text-white">
             <div class="projects" id="projects">
                 <h1 class="center">Skills</h1>
@@ -130,8 +138,8 @@
                     <p class="project-title">Artificial Intelligence Discord Bot</p>
                     <p class="project-stack">NodeJS,ExpressJS Discord API, OpenAi API</p>
                     <div class="links">
-
-                        <button><a href="https://github.com/ashikkabeer/OpenAi-Discord-Bot">Source Code</a></button>
+                        <button><a href="https://github.com/ashikkabeer/OpenAi-Discord-Bot" class="live">Source
+                                Code</a></button>
                     </div>
                     <div class="project-explain">
                         <p class="project-details">Implemented OpenAi chatbot in Discord as a bot to enhance user
@@ -202,6 +210,7 @@
             </div>
         </div>
     </div>
+    <script src="script.js"></script>
 </body>
 
 </html>
