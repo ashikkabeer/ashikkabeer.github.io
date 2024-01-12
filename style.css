@@ -194,8 +194,24 @@ button {
     padding: 5px 5px;
     border: 0px;
     border-radius: 5px;
+    transition: background-color 0.3s ease;
 }
 
+button:hover {
+    animation: hover-animation 1s ease;
+}
+
+@keyframes hover-animation {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
 .connect-btn {
     display: inline-block;
     margin-top: 10px;
