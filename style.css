@@ -44,12 +44,15 @@ body {
 }
 
 .nav {
+    position: fixed;
+    width: 100%;
     align-items: center;
     max-width: 100%;
     display: flex;
     justify-content: space-around;
     text-decoration: none;
     background-color: var(--primary-color);
+    
 }
 .nav-mobile {
     display: none;
