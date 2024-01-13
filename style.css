@@ -9,7 +9,10 @@ html {
     scroll-behavior: smooth;
 }
 
-
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
 .changeColor {
     border-radius: 5px;
     opacity: 50%;
@@ -93,10 +96,13 @@ body {
 }
 
 .quote {
+    overflow: hidden;
+    white-space: nowrap;
     font-family: 'Cedarville Cursive', cursive;
     font-size: 1.5em;
     user-select: none;
-    animation: textAnimation 1s ease-in-out;
+    animation: typing 3.5s steps(70, end), blink-caret 0.5s ease-in-out infinite;
+    /* animation: textAnimation 1s ease-in-out; */
 
 }
 
