@@ -5,7 +5,7 @@ const colorArray = [
   ['#FFE66D', '#0d0d0d', '#F7FFF7', '#343434'],
   // ['#161A1E', '#22272C', '#FAF9F6', '#FAF9F6'], //white and black
   ['#FAF9F6', '#0d0d0d', '#FAF9F6', '#0d0d0d'], //white and black
-  ['#33b15d', '#0d0d0d', '#ffffff', '#ffffff'],
+  ['#33b15d', '#0d0d0d', '##FAF9F6', '##FAF9F6'],
 
 
   // Add more color combinations as needed
