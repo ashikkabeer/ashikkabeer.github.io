@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1 Cr Roadmap</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: #0f0f13; color: #e2e2e8; min-height: 100vh; padding: 24px 16px; }
+  
+  .header { text-align: center; margin-bottom: 36px; }
+  .header h1 { font-size: 1.6rem; font-weight: 700; color: #fff; letter-spacing: -0.5px; }
+  .header .sub { color: #888; font-size: 0.85rem; margin-top: 6px; }
+  .header .arrow { font-size: 2rem; color: #f0a500; font-weight: 900; margin: 8px 0; }
+
+  .phase-nav { display: flex; gap: 8px; justify-content: center; flex-wrap: wrap; margin-bottom: 28px; }
+  .phase-btn { padding: 7px 16px; border-radius: 20px; border: 1.5px solid #333; background: transparent; color: #aaa; font-size: 0.78rem; cursor: pointer; transition: all 0.2s; }
+  .phase-btn.active, .phase-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(255,255,255,0.04); }
+
+  .phase { display: none; animation: fadeIn 0.3s ease; }
+  .phase.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+  .phase-header { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; padding: 18px 20px; border-radius: 14px; border: 1px solid #222; background: #16161d; }
+  .phase-badge { font-size: 1.8rem; }
+  .phase-title { font-size: 1.1rem; font-weight: 700; color: #fff; }
+  .phase-sub { font-size: 0.78rem; color: #888; margin-top: 2px; }
+  .salary-tag { margin-left: auto; text-align: right; }
+  .salary-tag .from { font-size: 0.7rem; color: #666; }
+  .salary-tag .to { font-size: 1rem; font-weight: 800; }
+
+  .section { margin-bottom: 18px; }
+  .section-title { font-size: 0.7rem; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; color: #666; margin-bottom: 10px; padding-left: 4px; }
+
+  .card-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .card { background: #16161d; border: 1px solid #222; border-radius: 12px; padding: 14px; }
+  .card h4 { font-size: 0.82rem; font-weight: 700; color: #fff; margin-bottom: 6px; }
+  .card p, .card li { font-size: 0.77rem; color: #999; line-height: 1.55; }
+  .card ul { padding-left: 14px; }
+  .card li { margin-bottom: 3px; }
+  .card.full { grid-column: 1 / -1; }
+  .card.accent { border-color: var(--accent); }
+
+  .daily-block { background: #16161d; border: 1px solid #222; border-radius: 12px; overflow: hidden; margin-bottom: 10px; }
+  .daily-row { display: flex; align-items: flex-start; gap: 14px; padding: 12px 16px; border-bottom: 1px solid #1e1e26; }
+  .daily-row:last-child { border-bottom: none; }
+  .time-pill { font-size: 0.7rem; font-weight: 700; padding: 3px 10px; border-radius: 20px; white-space: nowrap; flex-shrink: 0; margin-top: 2px; }
+  .daily-row .desc { font-size: 0.79rem; color: #bbb; line-height: 1.5; }
+  .daily-row .desc strong { color: #fff; }
+
+  .milestone-list { list-style: none; }
+  .milestone-list li { display: flex; align-items: flex-start; gap: 12px; padding: 10px 0; border-bottom: 1px solid #1c1c24; font-size: 0.8rem; color: #bbb; }
+  .milestone-list li:last-child { border-bottom: none; }
+  .milestone-list .icon { font-size: 1rem; flex-shrink: 0; margin-top: 1px; }
+
+  .bottom-note { background: #16161d; border: 1px solid #2a2a36; border-radius: 12px; padding: 16px 18px; margin-top: 10px; font-size: 0.78rem; color: #888; line-height: 1.6; }
+  .bottom-note strong { color: #f0a500; }
+
+  /* Per-phase accent colors */
+  .p1 { --accent: #4a9eff; }
+  .p2 { --accent: #7c6fff; }
+  .p3 { --accent: #00c896; }
+  .p4 { --accent: #f0a500; }
+  .p5 { --accent: #ff5f6d; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Backend Engineer → ₹1 Crore/year</h1>
+  <div class="arrow">₹10L → ₹1Cr</div>
+  <div class="sub">A realistic 7–8 year plan with daily weekday habits</div>
+</div>
+
+<div class="phase-nav">
+  <button class="phase-btn active" onclick="show('p1', this)">Phase 1 · Now</button>
+  <button class="phase-btn" onclick="show('p2', this)">Phase 2 · Year 1–2</button>
+  <button class="phase-btn" onclick="show('p3', this)">Phase 3 · Year 2–4</button>
+  <button class="phase-btn" onclick="show('p4', this)">Phase 4 · Year 4–6</button>
+  <button class="phase-btn" onclick="show('p5', this)">Phase 5 · Year 6–8+</button>
+  <button class="phase-btn" onclick="show('daily', this)">📅 Daily Routine</button>
+</div>
+
+<!-- PHASE 1 -->
+<div class="phase active p1" id="p1">
+  <div class="phase-header">
+    <div class="phase-badge">🌱</div>
+    <div>
+      <div class="phase-title">Phase 1 — Lay the Foundation Right</div>
+      <div class="phase-sub">Now → 12 months (Month 0–12)</div>
+    </div>
+    <div class="salary-tag">
+      <div class="from">Current</div>
+      <div class="to" style="color:#4a9eff">₹10–15L</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Core Technical Focus</div>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Go Depth (your stack)</h4>
+        <ul>
+          <li>Goroutines, channels, context</li>
+          <li>HTTP internals, middleware</li>
+          <li>Testing, benchmarks, profiling</li>
+          <li>Error handling patterns</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Databases — Go Deep</h4>
+        <ul>
+          <li>Indexing, query plans (EXPLAIN)</li>
+          <li>Transactions & isolation levels</li>
+          <li>Connection pooling</li>
+          <li>Redis: when and why</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Backend Fundamentals</h4>
+        <ul>
+          <li>REST API design principles</li>
+          <li>Auth: JWT, OAuth2 flows</li>
+          <li>HTTP/2, caching headers</li>
+          <li>Basic message queues</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>DSA — Consistent Practice</h4>
+        <ul>
+          <li>2 LeetCode problems/day</li>
+          <li>Focus: arrays, maps, trees, graphs</li>
+          <li>Learn to communicate while solving</li>
+          <li>Target: 100 problems by month 6</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Career & Visibility Moves</div>
+    <div class="card-grid">
+      <div class="card full">
+        <h4>What to do at Zoko right now</h4>
+        <ul>
+          <li>Deeply understand every system you touch — ask "why" relentlessly</li>
+          <li>Write good documentation for what you build (rare and noticed)</li>
+          <li>Ship small things well, then volunteer for slightly bigger things</li>
+          <li>Build a reputation as someone who takes ownership, not just completes tasks</li>
+          <li>Use Claude Code to output more than your experience level should allow — but understand every line</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <strong>Phase 1 goal:</strong> Build habits. Most engineers at 6 months are trying to survive. You want to be someone who's already growing a system-level mental model and shipping quality work. The salary jump here is modest (₹10→15L) but the foundation determines everything.
+  </div>
+</div>
+
+<!-- PHASE 2 -->
+<div class="phase p2" id="p2">
+  <div class="phase-header">
+    <div class="phase-badge">⚡</div>
+    <div>
+      <div class="phase-title">Phase 2 — Build Leverage & Specialise</div>
+      <div class="phase-sub">Year 1–2 (Month 12–24)</div>
+    </div>
+    <div class="salary-tag">
+      <div class="from">Target</div>
+      <div class="to" style="color:#7c6fff">₹20–30L</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Technical Depth to Acquire</div>
+    <div class="card-grid">
+      <div class="card">
+        <h4>System Design Basics</h4>
+        <ul>
+          <li>Load balancing, horizontal scaling</li>
+          <li>CAP theorem, consistency models</li>
+          <li>Caching strategies (L1/L2, CDN)</li>
+          <li>Read: Designing Data-Intensive Apps</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Distributed Systems Entry</h4>
+        <ul>
+          <li>Message brokers: Kafka or RabbitMQ</li>
+          <li>Idempotency & at-least-once delivery</li>
+          <li>Event-driven architecture patterns</li>
+          <li>Webhooks at scale (you already do this)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Infra Basics</h4>
+        <ul>
+          <li>Docker & Kubernetes fundamentals</li>
+          <li>CI/CD pipelines</li>
+          <li>Observability: logs, metrics, traces</li>
+          <li>Cloud: GCP or AWS core services</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Security Fundamentals</h4>
+        <ul>
+          <li>OWASP Top 10</li>
+          <li>SQL injection, XSS, CSRF</li>
+          <li>Rate limiting, API auth hardening</li>
+          <li>Secrets management</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Career Moves</div>
+    <div class="card-grid">
+      <div class="card accent">
+        <h4>🎯 First Job Switch (around month 18)</h4>
+        <p>Your first switch is the biggest salary multiplier. Loyalty rarely pays early in career. Target product-based companies or well-funded startups paying ₹20–30L. Your WhatsApp API + messaging infra work is a strong story.</p>
+      </div>
+      <div class="card">
+        <h4>Start Building Publicly</h4>
+        <ul>
+          <li>Write 1 technical blog post/month</li>
+          <li>GitHub: keep projects active</li>
+          <li>LinkedIn: document your learnings</li>
+          <li>Your carousel generator project counts</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <strong>Phase 2 goal:</strong> Your first job switch + specialization is where ₹10L becomes ₹25L. The switch is not optional — internal raises rarely match market. Build the narrative: "I own messaging infra at scale."
+  </div>
+</div>
+
+<!-- PHASE 3 -->
+<div class="phase p3" id="p3">
+  <div class="phase-header">
+    <div class="phase-badge">🏗️</div>
+    <div>
+      <div class="phase-title">Phase 3 — Become a Senior Engineer</div>
+      <div class="phase-sub">Year 2–4 (Month 24–48)</div>
+    </div>
+    <div class="salary-tag">
+      <div class="from">Target</div>
+      <div class="to" style="color:#00c896">₹40–60L</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Technical Mastery</div>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Advanced System Design</h4>
+        <ul>
+          <li>Design systems like WhatsApp, Uber, Stripe</li>
+          <li>Sharding, partitioning strategies</li>
+          <li>Multi-region, failover patterns</li>
+          <li>Do mock interviews on system design</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Performance Engineering</h4>
+        <ul>
+          <li>Profiling Go apps in production</li>
+          <li>Database tuning at real scale</li>
+          <li>Memory management, GC tuning</li>
+          <li>Cost optimization at infra level</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>API & Integration Expertise</h4>
+        <ul>
+          <li>gRPC, GraphQL, event-driven APIs</li>
+          <li>API versioning strategies</li>
+          <li>High-throughput webhook systems</li>
+          <li>Third-party integration patterns</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>AI Integration Skills</h4>
+        <ul>
+          <li>LLM APIs, prompt engineering</li>
+          <li>RAG architecture basics</li>
+          <li>AI product feature design</li>
+          <li>This is your moat from current work</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">The Senior Engineer Mindset Shift</div>
+    <div class="card-grid">
+      <div class="card full">
+        <h4>What separates a senior from a mid-level</h4>
+        <ul>
+          <li><strong>Scope expansion:</strong> You own systems, not tasks. You think about what happens 6 months from now</li>
+          <li><strong>Mentoring:</strong> Making others around you faster makes you more valuable</li>
+          <li><strong>Proactive problem-finding:</strong> You see problems before they become incidents</li>
+          <li><strong>Estimation accuracy:</strong> You can break down a project and give realistic timelines</li>
+          <li><strong>Trade-off articulation:</strong> You explain why X over Y with real reasoning</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Career Moves</div>
+    <div class="card-grid">
+      <div class="card accent">
+        <h4>🎯 Second Job Switch</h4>
+        <p>By year 3–4, target FAANG-adjacent (Atlassian, Stripe, Razorpay, CRED, PhonePe, etc) or remote-first companies paying global-competitive salaries. This is where ₹40–60L becomes real.</p>
+      </div>
+      <div class="card">
+        <h4>Open Source Contribution</h4>
+        <ul>
+          <li>Contribute to a well-known Go project</li>
+          <li>Even docs/bug fixes build credibility</li>
+          <li>Creates inbound opportunities</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 4 -->
+<div class="phase p4" id="p4">
+  <div class="phase-header">
+    <div class="phase-badge">🚀</div>
+    <div>
+      <div class="phase-title">Phase 4 — Staff Engineer or Remote Premium</div>
+      <div class="phase-sub">Year 4–6 (Month 48–72)</div>
+    </div>
+    <div class="salary-tag">
+      <div class="from">Target</div>
+      <div class="to" style="color:#f0a500">₹60–100L</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Two Paths to ₹1Cr — Pick One or Combine</div>
+    <div class="card-grid">
+      <div class="card accent">
+        <h4>Path A: Staff Engineer at Top Indian Co</h4>
+        <ul>
+          <li>Target: Zepto, CRED, Razorpay, PhonePe, Groww</li>
+          <li>Staff = cross-team technical leadership</li>
+          <li>You drive architecture decisions at org level</li>
+          <li>Comp range: ₹80L–1.5Cr at top unicorns</li>
+          <li>Requires: Deep specialization + org visibility</li>
+        </ul>
+      </div>
+      <div class="card accent">
+        <h4>Path B: Remote for US/EU Company</h4>
+        <ul>
+          <li>Target: Fully remote companies (Stripe, Cloudflare, etc)</li>
+          <li>$100–150K USD = ₹85L–1.25Cr at current rates</li>
+          <li>Requires: Strong system design + interview skills</li>
+          <li>Portfolio + public work matters a lot here</li>
+          <li>Often fastest path to ₹1Cr for Indian engineers</li>
+        </ul>
+      </div>
+      <div class="card full">
+        <h4>Path C: FAANG India (hardest, highest ceiling)</h4>
+        <p>Google, Meta, Microsoft, Amazon Bangalore. SDE2/SDE3 = ₹80L–2Cr+. Requires cracking hard system design + DSA interviews. Start preparing 6 months before applying. High effort, massive reward.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Skills to Build for All Paths</div>
+    <div class="card-grid">
+      <div class="card">
+        <h4>Technical Writing</h4>
+        <ul>
+          <li>Write RFCs / design docs that people read</li>
+          <li>Blog posts that rank and get shared</li>
+          <li>Talk at meetups / conferences</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h4>Interview Prep (ongoing)</h4>
+        <ul>
+          <li>System design: do 1 mock/week</li>
+          <li>DSA: maintain 300+ solved problems</li>
+          <li>Behavioural: STAR method, leadership stories</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PHASE 5 -->
+<div class="phase p5" id="p5">
+  <div class="phase-header">
+    <div class="phase-badge">💰</div>
+    <div>
+      <div class="phase-title">Phase 5 — ₹1 Crore Achieved</div>
+      <div class="phase-sub">Year 6–8 (Month 72–96)</div>
+    </div>
+    <div class="salary-tag">
+      <div class="from">Target</div>
+      <div class="to" style="color:#ff5f6d">₹1Cr+</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">What You Look Like at This Stage</div>
+    <div class="card-grid">
+      <div class="card full">
+        <ul style="font-size:0.82rem; color:#bbb; line-height:1.8; padding-left:16px;">
+          <li>You've built and operated production systems serving millions of users</li>
+          <li>You can design any standard distributed system from scratch</li>
+          <li>You are known — online, in your domain, in hiring circles</li>
+          <li>You don't apply for jobs; opportunities come to you</li>
+          <li>You mentor 2–3 junior engineers and are seen as a multiplier</li>
+          <li>You understand business impact and communicate it fluently</li>
+          <li>You have chosen your specialization and are one of the best in India at it</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Salary Targets by Route</div>
+    <div class="card-grid">
+      <div class="card"><h4>FAANG India SDE3</h4><p style="color:#ff5f6d; font-size:1rem; font-weight:700; margin-top:6px;">₹1.2–2.5Cr</p><p style="font-size:0.73rem; color:#777; margin-top:4px;">Base + RSU + Bonus</p></div>
+      <div class="card"><h4>Remote US Company</h4><p style="color:#ff5f6d; font-size:1rem; font-weight:700; margin-top:6px;">₹1–1.5Cr</p><p style="font-size:0.73rem; color:#777; margin-top:4px;">$120–180K USD equivalent</p></div>
+      <div class="card"><h4>Unicorn Staff Eng</h4><p style="color:#ff5f6d; font-size:1rem; font-weight:700; margin-top:6px;">₹80L–1.5Cr</p><p style="font-size:0.73rem; color:#777; margin-top:4px;">Razorpay, CRED, Zepto tier</p></div>
+      <div class="card"><h4>Consulting / Fractional</h4><p style="color:#ff5f6d; font-size:1rem; font-weight:700; margin-top:6px;">₹1–3Cr</p><p style="font-size:0.73rem; color:#777; margin-top:4px;">Highest ceiling, riskiest path</p></div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <strong>The honest truth:</strong> The ₹1Cr number is achievable for anyone willing to be deliberate. Most engineers get comfortable at ₹30–40L and stop compounding. The difference is consistent skill-building, strategic job switches, and building a visible reputation. You started asking this question at 6 months. That mindset alone puts you ahead.
+  </div>
+</div>
+
+<!-- DAILY ROUTINE -->
+<div class="phase" id="daily">
+  <div class="phase-header">
+    <div class="phase-badge">📅</div>
+    <div>
+      <div class="phase-title">Daily Weekday Schedule</div>
+      <div class="phase-sub">Non-negotiable 1.5 hrs/day outside work</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Morning Block (30 min before work)</div>
+    <div class="daily-block">
+      <div class="daily-row">
+        <span class="time-pill" style="background:#1a2a3a; color:#4a9eff;">6:30 AM</span>
+        <div class="desc"><strong>DSA — 1 LeetCode problem</strong><br>Timed, no hints. Easy → Medium → Hard progression. Write the solution like you're in an interview.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">During Work (every day)</div>
+    <div class="daily-block">
+      <div class="daily-row">
+        <span class="time-pill" style="background:#1a1a2e; color:#7c6fff;">At work</span>
+        <div class="desc"><strong>Go deep on one thing you ship</strong><br>Don't just make it work. Ask: "Why does this work? What breaks it? How does it behave at 100x load?" One question per day compounds massively.</div>
+      </div>
+      <div class="daily-row">
+        <span class="time-pill" style="background:#1a1a2e; color:#7c6fff;">Lunch</span>
+        <div class="desc"><strong>Read one engineering blog or system design article</strong><br>Engineering at Uber, Netflix Tech Blog, Martin Fowler, High Scalability. Even 15 minutes of focused reading builds mental models fast.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Evening Block (1 hr after work)</div>
+    <div class="daily-block">
+      <div class="daily-row">
+        <span class="time-pill" style="background:#0a2a1e; color:#00c896;">Mon / Wed</span>
+        <div class="desc"><strong>Concept Deep Dive</strong><br>Pick one topic for the week (e.g., Kafka, PostgreSQL indexing, Go concurrency). Spend 2 sessions going deep — read, experiment, break things in code.</div>
+      </div>
+      <div class="daily-row">
+        <span class="time-pill" style="background:#0a2a1e; color:#00c896;">Tue / Thu</span>
+        <div class="desc"><strong>Build Something</strong><br>Side projects, your Instagram carousel generator, or experiments at work. Shipping builds intuition faster than any course. Aim to have 3–4 real projects in 12 months.</div>
+      </div>
+      <div class="daily-row">
+        <span class="time-pill" style="background:#2a1a0a; color:#f0a500;">Friday</span>
+        <div class="desc"><strong>Write + Review week</strong><br>Spend 30 min writing: a blog draft, a LinkedIn post, a TIL note. Spend 30 min reviewing the week — what you learned, what slipped, what to carry forward.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Weekly Non-Negotiables</div>
+    <div class="card-grid">
+      <div class="card">
+        <h4>5x DSA problems</h4>
+        <p>1 per morning. Never skip. This single habit is what gets you through interview filters.</p>
+      </div>
+      <div class="card">
+        <h4>1 concept mastered</h4>
+        <p>Not "read about" — actually understand well enough to explain it simply.</p>
+      </div>
+      <div class="card">
+        <h4>1 thing built or shipped</h4>
+        <p>Even a tiny script, a feature, a proof of concept. Bias toward shipping.</p>
+      </div>
+      <div class="card">
+        <h4>1 post or note published</h4>
+        <p>LinkedIn, blog, even a GitHub gist. Building your external reputation starts now.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">Quarterly Reviews (every 3 months)</div>
+    <div class="daily-block">
+      <div class="daily-row">
+        <span class="time-pill" style="background:#2a1a2e; color:#c084fc;">Q Review</span>
+        <div class="desc"><strong>Skills audit:</strong> What did I get noticeably better at? What am I avoiding?</div>
+      </div>
+      <div class="daily-row">
+        <span class="time-pill" style="background:#2a1a2e; color:#c084fc;">Q Review</span>
+        <div class="desc"><strong>Market check:</strong> Look at 10 job postings at the next level. What's missing in my profile?</div>
+      </div>
+      <div class="daily-row">
+        <span class="time-pill" style="background:#2a1a2e; color:#c084fc;">Q Review</span>
+        <div class="desc"><strong>Visibility check:</strong> Did I write anything? Did I speak to anyone outside my company? Am I building a reputation?</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="bottom-note">
+    <strong>The math:</strong> 1.5 hrs/day × 250 weekdays = 375 hrs/year of deliberate growth on top of your job. That's the equivalent of a full extra quarter of a year spent purely on levelling up. Over 7 years, that's 2,625 hours of compounding. Most of your peers won't do this. That gap is where ₹1Cr lives.
+  </div>
+</div>
+
+<script>
+  function show(id, btn) {
+    document.querySelectorAll('.phase').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.phase-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    btn.classList.add('active');
+  }
+</script>
+</body>
+</html>
