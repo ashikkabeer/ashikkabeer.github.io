@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>The LLM Roadmap — A Field Manual</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1814;
+    --paper: #f5f1e8;
+    --paper-warm: #ebe5d4;
+    --rule: #2a2622;
+    --accent: #b8472a;
+    --accent-soft: #d97757;
+    --moss: #5a6b3d;
+    --muted: #6b6357;
+    --done: #9a9183;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #ece6d4;
+      --paper: #1a1814;
+      --paper-warm: #211e18;
+      --rule: #ece6d4;
+      --accent: #d97757;
+      --accent-soft: #e89473;
+      --moss: #8ba364;
+      --muted: #9a9183;
+      --done: #5a544a;
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Fraunces', Georgia, serif;
+    background: var(--paper);
+    color: var(--ink);
+    line-height: 1.6;
+    font-size: 17px;
+    font-feature-settings: "ss01", "ss02";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .grain {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.4;
+    mix-blend-mode: multiply;
+    background-image: url("data:image/svg+xml;utf8,<svg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.08 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .grain { mix-blend-mode: screen; opacity: 0.25; }
+  }
+
+  /* ===== HEADER ===== */
+  header {
+    border-bottom: 1px solid var(--rule);
+    padding: 24px 0 20px;
+    position: sticky;
+    top: 0;
+    background: var(--paper);
+    z-index: 100;
+  }
+
+  .header-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+  }
+
+  .masthead {
+    font-family: 'Inter Tight', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--muted);
+  }
+
+  .header-meta {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px 60px;
+    border-bottom: 1px solid var(--rule);
+    position: relative;
+  }
+
+  .hero-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-label::before {
+    content: "";
+    width: 24px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(56px, 9vw, 128px);
+    font-weight: 300;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin-bottom: 32px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+    font-weight: 400;
+  }
+
+  .hero-lede {
+    max-width: 640px;
+    font-size: 22px;
+    line-height: 1.5;
+    color: var(--ink);
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+
+  .hero-lede em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  /* ===== PROGRESS DASHBOARD ===== */
+  .dashboard {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 48px;
+    align-items: center;
+  }
+
+  .progress-block .label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+
+  .progress-number {
+    font-family: 'Fraunces', serif;
+    font-size: 96px;
+    font-weight: 300;
+    line-height: 1;
+    letter-spacing: -0.04em;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .progress-number .of {
+    color: var(--muted);
+    font-size: 48px;
+  }
+
+  .progress-bar-wrap {
+    margin-top: 16px;
+    height: 2px;
+    background: var(--paper-warm);
+    border: 1px solid var(--rule);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .progress-bar {
+    height: 100%;
+    background: var(--accent);
+    width: 0%;
+    transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .stage-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+  }
+
+  .stage-pill {
+    background: var(--paper);
+    padding: 16px;
+    cursor: pointer;
+    transition: background 0.2s;
+    text-align: left;
+    border: none;
+    color: var(--ink);
+    font-family: inherit;
+  }
+
+  .stage-pill:hover {
+    background: var(--paper-warm);
+  }
+
+  .stage-pill .pct {
+    font-family: 'Fraunces', serif;
+    font-size: 28px;
+    font-weight: 400;
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .stage-pill .pct-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+
+  .stage-pill.complete .pct {
+    color: var(--moss);
+  }
+
+  /* ===== STAGE SECTION ===== */
+  .stage {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 80px 40px;
+    border-bottom: 1px solid var(--rule);
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    gap: 64px;
+    position: relative;
+  }
+
+  .stage-meta {
+    position: sticky;
+    top: 100px;
+    align-self: start;
+  }
+
+  .stage-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--accent);
+    margin-bottom: 16px;
+  }
+
+  .stage-title {
+    font-family: 'Fraunces', serif;
+    font-size: 42px;
+    font-weight: 400;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 16px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .stage-title em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .stage-sub {
+    font-size: 16px;
+    color: var(--muted);
+    line-height: 1.5;
+    font-style: italic;
+  }
+
+  .stage-count {
+    margin-top: 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+  }
+
+  /* ===== CHECKLIST ITEMS ===== */
+  .items {
+    list-style: none;
+  }
+
+  .item {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 20px;
+    padding: 24px 0;
+    border-top: 1px solid var(--rule);
+    cursor: pointer;
+    transition: padding-left 0.2s;
+  }
+
+  .item:hover {
+    padding-left: 8px;
+  }
+
+  .item:last-child {
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .checkbox {
+    width: 22px;
+    height: 22px;
+    border: 1.5px solid var(--rule);
+    border-radius: 2px;
+    flex-shrink: 0;
+    margin-top: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    background: transparent;
+  }
+
+  .item.done .checkbox {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+
+  .checkbox svg {
+    width: 14px;
+    height: 14px;
+    color: var(--paper);
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .item.done .checkbox svg {
+    opacity: 1;
+  }
+
+  .item-content {
+    min-width: 0;
+  }
+
+  .item-text {
+    font-size: 19px;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 6px;
+    transition: color 0.3s;
+  }
+
+  .item.done .item-text {
+    color: var(--done);
+    text-decoration: line-through;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--done);
+  }
+
+  .item-note {
+    font-size: 14px;
+    color: var(--muted);
+    font-style: italic;
+    margin-bottom: 8px;
+    line-height: 1.5;
+  }
+
+  .item-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--accent);
+    text-decoration: none;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .item-link:hover {
+    border-color: var(--accent);
+  }
+
+  .item-link::after {
+    content: "→";
+    transition: transform 0.2s;
+  }
+
+  .item-link:hover::after {
+    transform: translateX(3px);
+  }
+
+  /* ===== EPILOGUE ===== */
+  .epilogue {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 100px 40px;
+    border-bottom: 1px solid var(--rule);
+    text-align: center;
+  }
+
+  .epilogue-mark {
+    font-family: 'Fraunces', serif;
+    font-size: 120px;
+    line-height: 1;
+    color: var(--accent);
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 32px;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .epilogue-text {
+    max-width: 600px;
+    margin: 0 auto;
+    font-size: 22px;
+    line-height: 1.5;
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 300;
+  }
+
+  .epilogue-text em {
+    color: var(--accent);
+    font-style: normal;
+  }
+
+  /* ===== ACTIONS ===== */
+  .actions {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 40px;
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 16px 24px;
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn:hover {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--paper);
+  }
+
+  .btn-primary:hover {
+    background: var(--ink);
+    border-color: var(--ink);
+  }
+
+  /* ===== FOOTER ===== */
+  footer {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px;
+    display: flex;
+    justify-content: space-between;
+    border-top: 1px solid var(--rule);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--muted);
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .header-inner { padding: 0 24px; }
+    .hero { padding: 60px 24px 40px; }
+    h1 { font-size: 64px; }
+    .hero-lede { font-size: 18px; }
+    .dashboard {
+      grid-template-columns: 1fr;
+      padding: 32px 24px;
+      gap: 32px;
+    }
+    .stage-grid { grid-template-columns: repeat(2, 1fr); }
+    .stage {
+      grid-template-columns: 1fr;
+      padding: 60px 24px;
+      gap: 32px;
+    }
+    .stage-meta { position: static; }
+    .stage-title { font-size: 32px; }
+    .item-text { font-size: 16px; }
+    .epilogue { padding: 60px 24px; }
+    .epilogue-mark { font-size: 80px; }
+    .epilogue-text { font-size: 18px; }
+    .actions { padding: 32px 24px; }
+    footer { padding: 24px; flex-direction: column; gap: 8px; }
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .stage { animation: rise 0.8s ease-out both; }
+
+  .toast {
+    position: fixed;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%) translateY(80px);
+    background: var(--ink);
+    color: var(--paper);
+    padding: 14px 24px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    transition: transform 0.3s;
+    z-index: 200;
+    border: 1px solid var(--rule);
+  }
+
+  .toast.show {
+    transform: translateX(-50%) translateY(0);
+  }
+</style>
+</head>
+<body>
+
+<div class="grain"></div>
+
+<header>
+  <div class="header-inner">
+    <div class="masthead">The Field Manual · No. 01</div>
+    <div class="header-meta" id="header-meta">— / — complete</div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="hero-label">A roadmap for the ambitious engineer</div>
+  <h1>How to actually<br>understand <em>LLMs</em>.</h1>
+</section>
+
+<section class="dashboard">
+  <div class="progress-block">
+    <div class="label">Progress</div>
+    <div class="progress-number">
+      <span id="done-count">0</span><span class="of">/<span id="total-count">0</span></span>
+    </div>
+    <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+  </div>
+  <div class="stage-grid" id="stage-grid"></div>
+</section>
+
+<main id="stages"></main>
+
+<section class="epilogue">
+  <div class="epilogue-mark">¶</div>
+  <p class="epilogue-text">
+    The field rewards <em>depth over breadth</em> and <em>curiosity over credentials</em>. Both of those are choices you make every day.
+  </p>
+</section>
+
+<div class="actions">
+  <button class="btn" onclick="resetAll()">Reset progress</button>
+  <button class="btn" onclick="exportProgress()">Export progress</button>
+  <button class="btn btn-primary" onclick="scrollToNext()">Jump to next →</button>
+</div>
+
+<footer>
+  <div>The LLM Field Manual</div>
+  <div>Progress saved locally · <span id="last-saved">Never</span></div>
+</footer>
+
+<div class="toast" id="toast">Progress saved</div>
+
+<script>
+const stages = [
+  {
+    id: "s0",
+    num: "Stage 00",
+    title: "Foundations",
+    italic: "Foundations",
+    sub: "Math and Python comfort before LLMs. Skip nothing here.",
+    items: [
+      { id: "s0-1", text: "Confirm Python comfort (numpy, OOP, file I/O)", note: "If you're a working engineer, you have this." },
+      { id: "s0-2", text: "Watch 3Blue1Brown's neural networks playlist", note: "~4 hours. The best visual primer for the math.", link: "https://www.youtube.com/playlist?list=PLZHQObOWTQDNU6R1_67000Dx_ZCJB-3pi" },
+      { id: "s0-3", text: "Refresh linear algebra intuition", note: "Vectors, dot products, matrices — feel them geometrically." },
+      { id: "s0-4", text: "Refresh calculus intuition", note: "Derivatives and the chain rule. No proofs needed." },
+      { id: "s0-5", text: "Refresh probability basics", note: "Distributions, expected value, why log-probabilities matter." }
+    ]
+  },
+  {
+    id: "s1",
+    num: "Stage 01",
+    title: "Internals",
+    italic: "Internals",
+    sub: "Karpathy's Zero to Hero. Non-negotiable. Code along — do not just watch.",
+    items: [
+      { id: "s1-1", text: "Lecture 1 — Build micrograd from scratch", note: "The foundation everything else stands on.", link: "https://www.youtube.com/watch?v=VMj-3S1tku0" },
+      { id: "s1-2", text: "Lecture 2 — Bigram language model", link: "https://www.youtube.com/watch?v=PaCmpygFfXo" },
+      { id: "s1-3", text: "Lecture 3 — MLP language model", link: "https://www.youtube.com/watch?v=TCH_1BHY58I" },
+      { id: "s1-4", text: "Lecture 4 — Activations, gradients, BatchNorm", link: "https://www.youtube.com/watch?v=P6sfmUTpUmc" },
+      { id: "s1-5", text: "Lecture 5 — Manual backprop through everything", link: "https://www.youtube.com/watch?v=q8SA3rM6ckI" },
+      { id: "s1-6", text: "Lecture 6 — WaveNet-style deeper network", link: "https://www.youtube.com/watch?v=t3YJ5hKiMQ0" },
+      { id: "s1-7", text: "Rebuild micrograd from memory", note: "If you can do this, you understand backprop better than 95% of people who claim to." }
+    ]
+  },
+  {
+    id: "s2",
+    num: "Stage 02",
+    title: "Transformers",
+    italic: "Transformers",
+    sub: "Attention, tokenization, and GPT. The architecture that runs the world.",
+    items: [
+      { id: "s2-1", text: "The Illustrated Transformer — Jay Alammar", note: "The best visual explanation of attention.", link: "https://jalammar.github.io/illustrated-transformer/" },
+      { id: "s2-2", text: "Read 'Attention Is All You Need' (2017)", note: "The original paper. Short. Read it.", link: "https://arxiv.org/abs/1706.03762" },
+      { id: "s2-3", text: "Watch Karpathy's 'Let's build GPT'", link: "https://www.youtube.com/watch?v=kCc8FmEb1nY" },
+      { id: "s2-4", text: "Watch Karpathy's 'Let's build the GPT Tokenizer'", note: "80% of weird LLM behavior comes from tokenization. Almost nobody understands it.", link: "https://www.youtube.com/watch?v=zduSFxRajkE" },
+      { id: "s2-5", text: "Self-check — explain attention, K/Q/V, positional encoding, BPE to another engineer" }
+    ]
+  },
+  {
+    id: "s3",
+    num: "Stage 03",
+    title: "Training",
+    italic: "Training",
+    sub: "From small transformer to Claude or GPT. Scaling, RLHF, fine-tuning, evals.",
+    items: [
+      { id: "s3-1", text: "Scaling Laws for Neural Language Models (Kaplan et al. 2020)", link: "https://arxiv.org/abs/2001.08361" },
+      { id: "s3-2", text: "The Chinchilla paper (Hoffmann et al. 2022)", note: "Compute-optimal scaling. Shapes the entire industry.", link: "https://arxiv.org/abs/2203.15556" },
+      { id: "s3-3", text: "InstructGPT (Ouyang et al. 2022)", note: "The canonical RLHF reference.", link: "https://arxiv.org/abs/2203.02155" },
+      { id: "s3-4", text: "Constitutional AI (Anthropic)", link: "https://arxiv.org/abs/2212.08073" },
+      { id: "s3-5", text: "LoRA (Hu et al. 2021)", note: "The technique that makes fine-tuning practical.", link: "https://arxiv.org/abs/2106.09685" },
+      { id: "s3-6", text: "Work through Maxime Labonne's LLM Course", link: "https://github.com/mlabonne/llm-course" },
+      { id: "s3-7", text: "Understand the major benchmarks", note: "MMLU, GPQA, SWE-bench, HELM — and why scores often mislead." }
+    ]
+  },
+  {
+    id: "s4",
+    num: "Stage 04",
+    title: "Interpretability",
+    italic: "Interpretability",
+    sub: "The frontier most engineers ignore. This is where you start to differentiate.",
+    items: [
+      { id: "s4-1", text: "A Mathematical Framework for Transformer Circuits", link: "https://transformer-circuits.pub/2021/framework/index.html" },
+      { id: "s4-2", text: "Toy Models of Superposition (Anthropic, 2022)", note: "Why networks represent more features than they have neurons. Mind-expanding.", link: "https://transformer-circuits.pub/2022/toy_model/index.html" },
+      { id: "s4-3", text: "Scaling Monosemanticity (Anthropic, 2024)", note: "Interpretability tools applied to a real production model.", link: "https://transformer-circuits.pub/2024/scaling-monosemanticity/" },
+      { id: "s4-4", text: "Neel Nanda — Concrete Steps to Get Started in Mech Interp", link: "https://www.neelnanda.io/mechanistic-interpretability/getting-started" },
+      { id: "s4-5", text: "Subscribe to the Transformer Circuits Thread", link: "https://transformer-circuits.pub/" }
+    ]
+  },
+  {
+    id: "s5",
+    num: "Stage 05",
+    title: "Building",
+    italic: "Building",
+    sub: "The application layer — only after you understand the internals.",
+    items: [
+      { id: "s5-1", text: "Anthropic's prompt engineering documentation", link: "https://docs.claude.com/en/docs/build-with-claude/prompt-engineering/overview" },
+      { id: "s5-2", text: "Build a RAG system from scratch", note: "Use Chroma or FAISS. No framework. Build raw — LangChain hides too much." },
+      { id: "s5-3", text: "Read the ReAct paper", link: "https://arxiv.org/abs/2210.03629" },
+      { id: "s5-4", text: "Read the Toolformer paper", link: "https://arxiv.org/abs/2302.04761" },
+      { id: "s5-5", text: "Build an agent loop from scratch", note: "A while loop that calls an LLM and parses tool calls. That's it." },
+      { id: "s5-6", text: "Write a real eval suite for a task you care about", note: "This is the actual hard part of production LLM work." },
+      { id: "s5-7", text: "Try DSPy — the most interesting framework", link: "https://github.com/stanfordnlp/dspy" }
+    ]
+  },
+  {
+    id: "s6",
+    num: "Stage 06",
+    title: "Currency",
+    italic: "Currency",
+    sub: "Ongoing habits, not one-time tasks. The field moves fast.",
+    items: [
+      { id: "s6-1", text: "Subscribe to Import AI (Jack Clark)", link: "https://importai.substack.com/" },
+      { id: "s6-2", text: "Subscribe to Interconnects (Nathan Lambert)", link: "https://www.interconnects.ai/" },
+      { id: "s6-3", text: "Follow Karpathy, Olah, Willison on X" },
+      { id: "s6-4", text: "Bookmark Lilian Weng's blog", note: "Textbook-quality posts.", link: "https://lilianweng.github.io/" },
+      { id: "s6-5", text: "Build a 'one paper per week, read deeply' habit" },
+      { id: "s6-6", text: "Follow Anthropic, OpenAI, DeepMind, Meta AI research blogs" }
+    ]
+  },
+  {
+    id: "p",
+    num: "Stage 07",
+    title: "Projects",
+    italic: "Projects",
+    sub: "The actual differentiator. Run these in parallel with the stages above — don't wait.",
+    items: [
+      { id: "p-1", text: "Beginner — Train a char-level LM on a corpus you care about" },
+      { id: "p-2", text: "Beginner — Build a RAG system over your own notes" },
+      { id: "p-3", text: "Beginner — Fine-tune a small open model with LoRA" },
+      { id: "p-4", text: "Intermediate — Implement a paper from scratch", note: "Pick a small one. Reproducing teaches more than reading 50 papers." },
+      { id: "p-5", text: "Intermediate — Build an eval harness, compare models rigorously" },
+      { id: "p-6", text: "Intermediate — Build an agent that does something real for you" },
+      { id: "p-7", text: "Advanced — Reproduce nanoGPT or train your own LM" },
+      { id: "p-8", text: "Advanced — Interpretability micro-project on a small open model" },
+      { id: "p-9", text: "Advanced — Contribute to vLLM, llama.cpp, transformers, or similar" }
+    ]
+  }
+];
+
+const STORAGE_KEY = "llm-roadmap-progress-html-v1";
+let state = {};
+
+try {
+  const saved = localStorage.getItem(STORAGE_KEY);
+  if (saved) state = JSON.parse(saved);
+} catch (e) {}
+
+function save() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+    document.getElementById("last-saved").textContent = new Date().toLocaleTimeString();
+    showToast("Saved");
+  } catch (e) {}
+}
+
+function showToast(msg) {
+  const t = document.getElementById("toast");
+  t.textContent = msg;
+  t.classList.add("show");
+  clearTimeout(window._toastTimer);
+  window._toastTimer = setTimeout(() => t.classList.remove("show"), 1800);
+}
+
+function toggle(id) {
+  state[id] = !state[id];
+  save();
+  render();
+}
+
+function resetAll() {
+  if (!confirm("Reset all progress? This cannot be undone.")) return;
+  state = {};
+  try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  render();
+  showToast("Reset complete");
+}
+
+function exportProgress() {
+  const lines = ["LLM Roadmap — Progress Export", "=".repeat(40), ""];
+  for (const stage of stages) {
+    const done = stage.items.filter(i => state[i.id]).length;
+    lines.push(`${stage.num.toUpperCase()} — ${stage.title.toUpperCase()} (${done}/${stage.items.length})`);
+    for (const item of stage.items) {
+      lines.push(`  [${state[item.id] ? "x" : " "}] ${item.text}`);
+    }
+    lines.push("");
+  }
+  const blob = new Blob([lines.join("\n")], { type: "text/plain" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "llm-roadmap-progress.txt";
+  a.click();
+  URL.revokeObjectURL(url);
+  showToast("Exported");
+}
+
+function scrollToNext() {
+  for (const stage of stages) {
+    for (const item of stage.items) {
+      if (!state[item.id]) {
+        const el = document.getElementById(item.id);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth", block: "center" });
+          el.style.transition = "background 0.3s";
+          el.style.background = "var(--paper-warm)";
+          setTimeout(() => { el.style.background = ""; }, 1200);
+        }
+        return;
+      }
+    }
+  }
+  showToast("All complete. Go build.");
+}
+
+function render() {
+  let total = 0, done = 0;
+
+  const stagesEl = document.getElementById("stages");
+  stagesEl.innerHTML = stages.map((stage, idx) => {
+    const sDone = stage.items.filter(i => state[i.id]).length;
+    const sTotal = stage.items.length;
+    total += sTotal;
+    done += sDone;
+
+    const itemsHtml = stage.items.map(item => `
+      <li class="item ${state[item.id] ? 'done' : ''}" id="${item.id}" onclick="toggle('${item.id}')">
+        <div class="checkbox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
+        </div>
+        <div class="item-content">
+          <div class="item-text">${item.text}</div>
+          ${item.note ? `<div class="item-note">${item.note}</div>` : ''}
+          ${item.link ? `<a href="${item.link}" target="_blank" rel="noopener" class="item-link" onclick="event.stopPropagation()">Open resource</a>` : ''}
+        </div>
+      </li>
+    `).join('');
+
+    return `
+      <section class="stage" id="${stage.id}" style="animation-delay: ${idx * 0.08}s">
+        <aside class="stage-meta">
+          <div class="stage-num">${stage.num}</div>
+          <h2 class="stage-title"><em>${stage.italic}</em></h2>
+          <p class="stage-sub">${stage.sub}</p>
+          <div class="stage-count">${sDone} / ${sTotal} complete</div>
+        </aside>
+        <ul class="items">${itemsHtml}</ul>
+      </section>
+    `;
+  }).join('');
+
+  // Dashboard stage pills
+  const gridEl = document.getElementById("stage-grid");
+  gridEl.innerHTML = stages.map(stage => {
+    const sDone = stage.items.filter(i => state[i.id]).length;
+    const sTotal = stage.items.length;
+    const pct = Math.round((sDone / sTotal) * 100);
+    return `
+      <button class="stage-pill ${pct === 100 ? 'complete' : ''}" onclick="document.getElementById('${stage.id}').scrollIntoView({behavior:'smooth', block:'start'})">
+        <div class="pct">${pct}<span style="font-size:18px; color: var(--muted);">%</span></div>
+        <div class="pct-label">${stage.title}</div>
+      </button>
+    `;
+  }).join('');
+
+  // Top numbers
+  document.getElementById("done-count").textContent = done;
+  document.getElementById("total-count").textContent = total;
+  document.getElementById("header-meta").textContent = `${done} / ${total} complete`;
+  const pct = total === 0 ? 0 : (done / total) * 100;
+  document.getElementById("progress-bar").style.width = pct + "%";
+}
+
+render();
+</script>
+
+</body>
+</html>
